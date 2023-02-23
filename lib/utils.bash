@@ -74,8 +74,8 @@ install_version() {
 
   (
     mkdir -p "$install_path/bin"
-    echo "* Executing cp -r $ASDF_DOWNLOAD_PATH/* $install_path/bin..."
-    cp -r "$ASDF_DOWNLOAD_PATH"/* "$install_path/bin"
+    echo "* Executing tar xzf $ASDF_DOWNLOAD_PATH/*.tar.gz -C $install_path/bin"
+    tar xzf "$ASDF_DOWNLOAD_PATH"/*.tar.gz -C "$install_path/bin"
     echo "* ls $install_path/bin"
     ls $install_path/bin
     chmod +x "$install_path/bin/$TOOL_NAME"
