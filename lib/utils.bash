@@ -59,7 +59,7 @@ download_release() {
 
   url="$GH_REPO/releases/download/v${version}/${TOOL_NAME}-${version}-${platform}"
 
-  echo "* Downloading $TOOL_NAME release $version from $url"
+  echo "* Downloading $TOOL_NAME release $version from $url to $filename"
   curl "${curl_opts[@]}" -o "$filename" -C - "$url" || fail "Could not download $url"
 }
 
@@ -74,11 +74,14 @@ install_version() {
 
   (
     mkdir -p "$install_path/bin"
+    echo "* Executing cp -r $ASDF_DOWNLOAD_PATH/* $install_path/bin..."
     cp -r "$ASDF_DOWNLOAD_PATH"/* "$install_path/bin"
+    echo "* ls $install_path/bin"
+    ls $install_path/bin
     chmod +x "$install_path/bin/$TOOL_NAME"
 
     local tool_cmd
-    tool_cmd="$(echo "$TOOL_TEST" | cut -d' ' -f1)"
+    tool_cmd=$TOOL_NAME
     test -x "$install_path/bin/$tool_cmd" || fail "Expected $install_path/bin/$tool_cmd to be executable."
 
     echo "$TOOL_NAME $version installation was successful!"
