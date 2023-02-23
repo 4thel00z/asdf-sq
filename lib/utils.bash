@@ -75,6 +75,8 @@ install_version() {
   (
     mkdir -p "$install_path/bin"
     echo "* Executing tar xzf $ASDF_DOWNLOAD_PATH/*.tar.gz -C $install_path/bin"
+    ls $ASDF_DOWNLOAD_PATH
+
     tar xzf "$ASDF_DOWNLOAD_PATH"/*.tar.gz -C "$install_path/bin"
     echo "* ls $install_path/bin"
     ls $install_path/bin
